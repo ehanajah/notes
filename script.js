@@ -171,12 +171,14 @@ $(document).on(RENDER_EVENT, function () {
 
     for (const note of notes) {
         const { id, title, content } = note;
-
         const $noteCard = makeNoteCard(note);
         $noteListContainer.append($noteCard);
 
-        $("#title-" + id).text(title);
-        $("#content-" + id).text(content);
+        const $titleElement = $("#title-" + id);
+        const $contentElement = $("#content-" + id);
+
+        $titleElement.text(title);
+        $contentElement.text(content);
     }
 
     // Adding click event for delete buttons
