@@ -50,7 +50,7 @@ function makeNoteCard(note) {
             <div class="col col-sm-6 col-lg-4 col-xl-3">
                 <div class="my-2 note-card card border-dark rounded-0">
                     <div class="card-body clickable" data-id="${id}" id="note-${id}" onclick="editNote(${id})">
-                        <h5 class="card-title" id="title-${id}">Title</h5>
+                        <h5 class="card-title text-truncate" id="title-${id}">Title</h5>
                         <p class="card-text text-truncate" id="content-${id}">Content</p>
                     </div>
                     <div class="row">
