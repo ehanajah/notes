@@ -50,8 +50,8 @@ function makeNoteCard(note) {
             <div class="col col-sm-6 col-lg-4 col-xl-3">
                 <div class="my-2 note-card card border-dark rounded-0">
                     <div class="card-body clickable" data-id="${id}" id="note-${id}" onclick="editNote(${id})">
-                        <h5 class="card-title">${title}</h5>
-                        <p class="card-text text-truncate">${content}</p>
+                        <h5 class="card-title" id="title-${id}">Title</h5>
+                        <p class="card-text text-truncate" id="content-${id}">Content</p>
                     </div>
                     <div class="row">
                         <div class="col"></div>
@@ -170,8 +170,13 @@ $(document).on(RENDER_EVENT, function () {
     $noteListContainer.empty();
 
     for (const note of notes) {
+        const { id, title, content } = note;
+
         const $noteCard = makeNoteCard(note);
         $noteListContainer.append($noteCard);
+
+        $("#title-" + id).text(title);
+        $("#content-" + id).text(content);
     }
 
     // Adding click event for delete buttons
