@@ -43,9 +43,7 @@ function saveData() {
     }
 }
 
-function makeNoteCard(note) {
-    const { id, title, content } = note;
-
+function makeNoteCard(id    ) {
     const noteCardHTML = `
             <div class="col col-sm-6 col-lg-4 col-xl-3">
                 <div class="my-2 note-card card border-dark rounded-0">
@@ -171,7 +169,7 @@ $(document).on(RENDER_EVENT, function () {
 
     for (const note of notes) {
         const { id, title, content } = note;
-        const $noteCard = makeNoteCard(note);
+        const $noteCard = makeNoteCard(id);
         $noteListContainer.append($noteCard);
 
         const $titleElement = $("#title-" + id);
@@ -181,7 +179,6 @@ $(document).on(RENDER_EVENT, function () {
         $contentElement.text(content);
     }
 
-    // Adding click event for delete buttons
     $('.delete-button').off().click(function () {
         const noteId = $(this).data('id');
         removeNote(noteId);
