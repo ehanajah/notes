@@ -20,9 +20,9 @@ function generateNote(id, title, content) {
 
 function findNote(noteId) {
     for (const note of notes) {
-      if (note.id === noteId) {
-        return note;
-      }
+        if (note.id === noteId) {
+            return note;
+        }
     }
     return null;
 }
@@ -43,7 +43,7 @@ function saveData() {
     }
 }
 
-function makeNoteCard(id    ) {
+function makeNoteCard(id) {
     const noteCardHTML = `
             <div class="col col-sm-6 col-lg-4 col-xl-3">
                 <div class="my-2 note-card card border-dark rounded-0">
@@ -161,13 +161,25 @@ $(document).ready(function () {
     if (isStorageExist()) {
         loadDataFromStorage();
     }
+
+    $('#search-input').on('input', function () {
+        $(document).trigger(RENDER_EVENT);
+    });
 });
 
 $(document).on(RENDER_EVENT, function () {
     const $noteListContainer = $('#note-cards');
     $noteListContainer.empty();
 
-    for (const note of notes) {
+    const searchQuery = $('#search-input').val().toLowerCase();
+
+    const filteredNotes = notes.filter(note => {
+        const title = note.title.toLowerCase();
+        const content = note.content.toLowerCase();
+        return title.includes(searchQuery) || content.includes(searchQuery);
+    });
+
+    for (const note of filteredNotes) {
         const { id, title, content } = note;
         const $noteCard = makeNoteCard(id);
         $noteListContainer.append($noteCard);
